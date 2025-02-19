@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.title("Home Screen")
-st.image("logo.png", caption="Logo")  # Assumes logo.png is in the same directory
+st.image("Logo.png", caption="Logo")  # Assumes logo.png is in the same directory
 
 col1, col2 = st.columns(2)
 with col1:
