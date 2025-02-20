@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Center the title
 st.markdown("""
     <style>
     h1 {
@@ -7,13 +8,12 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 st.title("Plant Care - Random")
 st.write("This is the screen for Plant Care with the Random option.")
 st.write("Here, you can add specific content or functionality for this option.")
 
-st.write("")  # Adds a blank line
-st.write("")  # Adds another blank line
-
+# Custom CSS for button styling
 st.markdown("""
     <style>
     .stButton > button {
@@ -21,7 +21,6 @@ st.markdown("""
         height: 50px;  /* Button height */
         margin: 10px auto;  /* Center buttons within their columns */
         display: block;  /* Ensure centering works */
-        margin-left: 5x;
         transition: all 0.3s ease;  /* Smooth transition for hover effect */
         border: 2px solid #000000;  /* Default border */
     }
@@ -37,7 +36,7 @@ st.markdown("""
         border-color: #3b6945;  /* Border color on hover */
     }
     img {
-            margin-left: 50px;
+        margin-left: 50px;
     }
     div.stButton > button > div > p {
         font-size: 24px !important;  /* Adjust size */
@@ -45,11 +44,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Back button at the bottom
-if st.button("Back"):
-    st.switch_page("pages/plant_care_options.py")  # Navigate back to the home page
+# Add option buttons
+st.write("Choose an option:")
+option_col1, option_col2 = st.columns(2)
+with option_col1:
+    if st.button("My Plants"):
+        st.switch_page("pages/my_plants.py")  # Navigate to plant selection page
+with option_col2:
+    st.button("My Recommendations")  # No action when clicked, as specified
 
+st.write("")  # Adds a blank line
+st.write("")  # Adds another blank line
 
-# Back button at the bottom
-if st.button("Home"):
-    st.switch_page("app.py")  # Navigate back to the home page
+# Navigation buttons at the bottom
+nav_col1, nav_col2 = st.columns(2)
+with nav_col1:
+    if st.button("Back"):
+        st.switch_page("pages/plant_care_options.py")  # Navigate to plant care options page
+with nav_col2:
+    if st.button("Home"):
+        st.switch_page("app.py")  # Navigate to home page
