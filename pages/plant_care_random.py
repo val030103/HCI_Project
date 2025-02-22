@@ -1,66 +1,123 @@
 import streamlit as st
 
-# Center the title
+# Apply CSS styling to match the personalized main page
 st.markdown("""
     <style>
+    /* Title styling */
     h1 {
         text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 20px;
     }
-    </style>
-""", unsafe_allow_html=True)
-
-st.title("Plant Care - Random")
-st.write("This is the screen for Plant Care with the Random option.")
-st.write("Here, you can add specific content or functionality for this option.")
-
-# Custom CSS for button styling
-st.markdown("""
-    <style>
+    /* Button styling */
     .stButton > button {
-        width: 150px;  /* Button width */
-        height: 50px;  /* Button height */
-        margin: 10px auto;  /* Center buttons within their columns */
-        display: block;  /* Ensure centering works */
-        transition: all 0.3s ease;  /* Smooth transition for hover effect */
-        border: 2px solid #000000;  /* Default border */
+        width: 200px;
+        height: 50px;
+        margin: 10px auto;
+        display: block;
+        transition: all 0.3s ease;
+        border: 2px solid #000000;
+        color: #000000;
+        background-color: #ffffff;
     }
-    /* Normal state */
-    .stButton > button {
-        color: #000000;  /* Default text color */
-        background-color: #ffffff;  /* Default background */
-    }
-    /* Hover state */
     .stButton > button:hover {
-        color: #3b6945;  /* Text color on hover */
-        background-color: #f0f0f0;  /* Background color on hover */
-        border-color: #3b6945;  /* Border color on hover */
-    }
-    img {
-        margin-left: 50px;
+        color: #3b6945;
+        background-color: #f0f0f0;
+        border-color: #3b6945;
     }
     div.stButton > button > div > p {
-        font-size: 24px !important;  /* Adjust size */
+        font-size: 20px !important;
+    }
+    /* General text (instructions, messages) */
+    .stMarkdown {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #34495e;
+        text-align: center;
+    }
+    /* Day counter */
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+    /* Horizontal lines */
+    hr {
+        border: 2px solid #e0e0e0;
+        margin: 25px 0;
+    }
+    /* Footnote styling (if applicable) */
+    .footnote {
+        font-size: 12px;
+        color: #666666;
+        text-align: center;
+        margin-top: 20px;
+        animation: fadeOut 3s forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { opacity: 0; }
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Add option buttons
-st.write("Choose an option:")
-option_col1, option_col2 = st.columns(2)
-with option_col1:
+# Set title
+st.title("Plant Care - Random")
+
+# Initialize session state
+if 'day_counter' not in st.session_state:
+    st.session_state.day_counter = 0
+if 'selected_plants' not in st.session_state:
+    st.session_state.selected_plants = []
+if 'plant_conditions' not in st.session_state:
+    st.session_state.plant_conditions = {}
+
+# Instruction text
+st.markdown('<p class="stMarkdown">Choose an option:</p>', unsafe_allow_html=True)
+
+# Top buttons
+col1, col2, col3 = st.columns(3)
+with col1:
     if st.button("My Plants"):
-        st.switch_page("pages/my_plants.py")  # Navigate to plant selection page
-with option_col2:
-    st.button("My Recommendations")  # No action when clicked, as specified
+        st.switch_page("pages/care_my_plants_random.py")
+with col2:
+    if st.button("Add Conditions"):
+        st.switch_page("pages/care_add_conditions_random.py")
+with col3:
+    if st.button("Recommendations"):
+        st.switch_page("pages/care_my_recommendations_random.py")
 
-st.write("")  # Adds a blank line
-st.write("")  # Adds another blank line
+# First horizontal line
+st.markdown("<hr>", unsafe_allow_html=True)
 
-# Navigation buttons at the bottom
-nav_col1, nav_col2 = st.columns(2)
+# Day counter
+st.subheader(f"Day {st.session_state.day_counter}")
+
+# Conditional display of message or Next Day button
+if not st.session_state.selected_plants:
+    st.markdown('<p class="stMarkdown">No plants selected yet. Please go to \'My Plants\' to add some.</p>', unsafe_allow_html=True)
+else:
+    if st.button("Next Day"):
+        st.session_state.day_counter += 1
+        st.session_state.recommendation_available = True
+        st.rerun()
+
+# Second horizontal line
+st.markdown("<hr>", unsafe_allow_html=True)
+
+# Bottom buttons
+nav_col1, nav_col2, nav_col3 = st.columns(3)
 with nav_col1:
     if st.button("Back"):
-        st.switch_page("pages/plant_care_options.py")  # Navigate to plant care options page
-with nav_col2:
+        st.switch_page("pages/plant_care_options.py")
+with nav_col3:
     if st.button("Home"):
-        st.switch_page("app.py")  # Navigate to home page
+        st.switch_page("app.py")
+
+# Display confirmation footnotes (if applicable)
+# ... (keep existing footnote code if present)
