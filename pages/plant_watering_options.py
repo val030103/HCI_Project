@@ -30,15 +30,20 @@ with col3:
         st.switch_page("app.py")  # Navigate back to the home page
 with col4:
     if st.button("Reset All", key="reset_all_button"):
-        # Reset all session states for watering options
+        # Reset all session states for watering options and checkup learning
         st.session_state.selected_plants_copy = []
         st.session_state.random_watering_times = {}
         st.session_state.watering_schedule = {}
         st.session_state.days_passed = 0
         st.session_state.checkup_days_passed = 0
         st.session_state.plants_notified = set()
+        st.session_state.updated_watering_times = {}  # Clear latest checkup results
+        st.session_state.missed_time_counts = {}  # Reset tracked missed times
+        st.session_state.good_time_suggestions = {}  # Reset successful watering time data
+        st.session_state.checkup_confirmed = False  # Ensure checkup is not flagged as completed
         st.session_state.reset_confirmed = True  # Flag to show confirmation
-        st.rerun()
+        st.rerun()  # Force UI update
+
 
 # Apply button styling and add footnote styling with fade-out animation
 st.markdown("""
