@@ -109,7 +109,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("Plant Care - Personalized")
+st.title("Plant Care - V2")
 
 # Initialize session state
 if 'day_counter' not in st.session_state:

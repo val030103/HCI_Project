@@ -67,7 +67,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Set title
-st.title("Plant Care - Random")
+st.title("Plant Care - V1")
 
 # Initialize session state
 if 'day_counter' not in st.session_state:
