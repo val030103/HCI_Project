@@ -54,7 +54,6 @@ st.markdown("""
         font-size: 20px !important;  /* Ensure button text size is consistent */
     }
     /* Specific styling for the Home button (key="home_button") with hardcoded margins */
-    /* Specific styling for the Home button (key="home_button") with adjusted margins for alignment */
     [data-testid="stButton"][key="home_button"] > button {
         width: 200px;  /* Maintain default width */
         height: 50px;
@@ -126,17 +125,32 @@ if 'show_rating_menu' not in st.session_state:
 if 'ratings_confirmed_personalized' not in st.session_state:
     st.session_state.ratings_confirmed_personalized = False
 
-# Navigation options with improved spacing
+# Navigation options with improved spacing and centered logos
 st.markdown('<p class="stMarkdown">Choose an option:</p>', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
+
 with col1:
-    if st.button("My Plants"):
+    # Wrap st.image in a centered div
+    st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+    st.image("MyPlants_logo.png", width=60, output_format="auto")
+    st.markdown('</div>', unsafe_allow_html=True)
+    if st.button("My Plants", key="my_plants_button"):
         st.switch_page("pages/care_my_plants_personalized.py")
+
 with col2:
-    if st.button("Add Conditions"):
+    # Wrap st.image in a centered div
+    st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+    st.image("Condition_logo.png", width=60, output_format="auto")
+    st.markdown('</div>', unsafe_allow_html=True)
+    if st.button("Add Conditions", key="add_conditions_button"):
         st.switch_page("pages/care_add_conditions_personalized.py")
+
 with col3:
-    if st.button("Recommendations"):
+    # Wrap st.image in a centered div
+    st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+    st.image("Recommendations_logo.png", width=60, output_format="auto")
+    st.markdown('</div>', unsafe_allow_html=True)
+    if st.button("Recommendations", key="recommendations_button"):
         st.switch_page("pages/care_my_recommendations_personalized.py")
 
 # Day counter and feedback section with enhanced separator
@@ -194,7 +208,7 @@ with nav_col3:
 # Display confirmation footnotes with fade-out animation
 if 'plants_confirmed_personalized' in st.session_state and st.session_state.plants_confirmed_personalized:
     st.markdown(
-        '<p class="footnote">✓ Plants added successfully. <br>A new recommendation is now available in the \'Recommendations\' space.</p>',
+        '<p class="footnote">🌱 Plants added successfully. <br>A new recommendation is now available in the \'Recommendations\' space.</p>',
         unsafe_allow_html=True
     )
     st.markdown("""
