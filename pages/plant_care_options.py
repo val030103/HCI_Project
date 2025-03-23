@@ -14,10 +14,10 @@ st.title("Plant Care Options")
 # Top buttons: Random and Personalized
 col1, col2 = st.columns(2)
 with col1:
-    if st.button("Random"):
+    if st.button("Version 1"):
         st.switch_page("pages/plant_care_random.py")
 with col2:
-    if st.button("Personalized"):
+    if st.button("Version 2"):
         st.switch_page("pages/plant_care_personalized.py")
 
 # Horizontal line separator
